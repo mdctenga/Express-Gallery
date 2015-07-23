@@ -4,14 +4,20 @@ var app = express();
 var sequelize = require('sequelize');
 
 var jade = require('jade');
+
+var bodyParser = require('body-parser');
+
 app.set('views', './views');
 app.set('view engine', 'jade');
 
-app.get('/', function (req, res) {
-  res.render("index");
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.get('/new_photo', function (req, res) {
+  res.render("new_photo");
 });
 
-app.post('/', function (req, res) {
+app.post('/gallery', function (req, res) {
+  console.log(req.body);
   res.send('Got a POST request');
 });
 

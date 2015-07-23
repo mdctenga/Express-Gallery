@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title Express-Gallery
+  body
+    div
+      form(action='/gallery', method='POST', enctype='application/x-www-form-urlencoded')
+        input(type='text' name='author')
+        input(type='text' name='link')
+        input(type='text' name='description')
+        button Submit
