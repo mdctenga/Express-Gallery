@@ -1,11 +1,15 @@
 var config = require('./config/config.json');
 var express = require('express');
 var app = express();
+
 var sequelize = require('sequelize');
+var models  = require('./models');
 
 var jade = require('jade');
 
 var bodyParser = require('body-parser');
+
+var router  = express.Router();
 
 app.set('views', './views');
 app.set('view engine', 'jade');
@@ -22,6 +26,21 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.get('/new_photo', function (req, res) {
   res.render("new_photo");
 });
+
+
+
+app.get('/', function(req, res) {
+  models.Photo.findAll()
+    .then(function(photos) {
+      res.render('index', {
+        title: 'Express',
+        photos: photos
+      });
+    })
+  ;
+});
+
+module.exports = router;
 
 app.post('/gallery', function (req, res) {
   console.log(req.body);

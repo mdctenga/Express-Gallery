@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var photo = sequelize.define('photo', {
+  var Photo = sequelize.define('Photo', {
     author: DataTypes.TEXT,
     description: DataTypes.TEXT,
     link: DataTypes.TEXT
@@ -11,5 +11,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return photo;
+  return Photo;
 };
