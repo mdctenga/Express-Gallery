@@ -1,0 +1,8 @@
+extends _layout
+
+block content
+  h1 display_photo view
+    ul
+      p #{photo.author}
+      p #{photo.description}
+      img(src="#{photo.link}")

@@ -30,21 +30,35 @@ app.get('/new_photo', function (req, res) {
 
 
 app.get('/', function(req, res) {
-  models.Photo.findAll()
+  models.Photo
+    .findAll()
     .then(function(photos) {
-      res.render('index', {
-        title: 'Express',
-        photos: photos
-      });
-    })
-  ;
+      res.render('index', {"photos": photos});
+    });
+});
+
+app.get('/gallery/:id', function(req, res) {
+  models.Photo
+    .findById(req.params.id)
+    .then(function(photo) {
+      res.render('display_photo', {"photo": photo});
+    });
 });
 
 module.exports = router;
 
 app.post('/gallery', function (req, res) {
   console.log(req.body);
-  res.send('Got a POST request');
+  models.Photo.create({
+    author: req.body.author,
+    link: req.body.link,
+    description: req.body.description
+  })
+  .then(function(newPhoto) {
+    console.log(newPhoto);
+    res.redirect('/gallery/' + newPhoto.id);
+  });
+  // res.send('Photo was successfully create and is in the database!');
 });
 
 var server = app.listen(config.port, function () {

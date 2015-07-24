@@ -2,4 +2,8 @@ extends _layout
 
 block content
   h1 INDEX PAGE!
-  h2= photos.length
+    ul
+      each photo in photos
+        p #{photo.author}
+        p #{photo.description}
+        img(src="#{photo.link}")
