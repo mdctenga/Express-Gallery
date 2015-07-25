@@ -2,7 +2,13 @@ extends _layout
 
 block content
   h1 display_photo view
-    ul
-      p #{photo.author}
-      p #{photo.description}
-      img(src="#{photo.link}")
+  ul
+    p #{photo.author}
+    p #{photo.description}
+    img(src="#{photo.link}")
+  form(action='/gallery/#{photo.id}', method='POST', enctype='application/x-www-form-urlencoded')
+    input(type='hidden', value='PUT', name='_method')
+    input(type='text' name='author')
+    input(type='text' name='description')
+    input(type='text' name='link')
+    button Submit

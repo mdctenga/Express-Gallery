@@ -6,13 +6,15 @@
   "dependencies": {
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
+    "method-override": "^2.3.4",
     "pg": "^4.4.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.4.1"
   },
   "devDependencies": {
     "faker": "^3.0.0",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "morgan": "^1.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

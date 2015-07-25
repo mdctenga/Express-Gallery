@@ -9,23 +9,24 @@ var jade = require('jade');
 
 var bodyParser = require('body-parser');
 
+var methodOverride = require('method-override');
+
 var router  = express.Router();
+var morgan = require('morgan');
 
 app.set('views', './views');
 app.set('view engine', 'jade');
 
-app.use(bodyParser.urlencoded({extended: false}));
-// app.use(methodOverride(function(req, res, next){
-//   if (req.body && typeof  req.body === 'object' && '_method' in req.body) {
-//     var method = req.body._method;
-//     return method;
-//   }
-//   next();
-// }));
+app.use(morgan('dev'));
 
-app.get('/new_photo', function (req, res) {
-  res.render("new_photo");
-});
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride(function(req, res){
+  if (req.body && typeof  req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    return method;
+  }
+}));
+
 
 
 
@@ -41,25 +42,49 @@ app.get('/gallery/:id', function(req, res) {
   models.Photo
     .findById(req.params.id)
     .then(function(photo) {
+
       res.render('display_photo', {"photo": photo});
     });
+});
+
+app.put('/gallery/:id', function (req, res) {
+  console.log(req.body);
+  models.Photo
+    .findById(req.params.id)
+    .then(function(photo) {
+      return photo.updateAttributes({
+        author: photo.author,
+        description: photo.description,
+        link: photo.link
+      });
+    })
+    .then(function() {
+      res.redirect('/gallery/' + req.params.id);
+    });
+});
+
+app.get('/new_photo', function (req, res) {
+  res.render('new_photo');
+});
+
+app.get('/gallery/:id/edit', function (req, res) {
+  res.render('edit_photo');
 });
 
 module.exports = router;
 
 app.post('/gallery', function (req, res) {
-  console.log(req.body);
+  // console.log(req.body);
   models.Photo.create({
     author: req.body.author,
     link: req.body.link,
     description: req.body.description
   })
   .then(function(newPhoto) {
-    console.log(newPhoto);
-    res.redirect('/gallery/' + newPhoto.id);
-  });
+    res.redirect('/gallery/' + newPhoto.id);  });
   // res.send('Photo was successfully create and is in the database!');
 });
+
 
 var server = app.listen(config.port, function () {
   var host = server.address().address;
