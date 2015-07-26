@@ -48,18 +48,28 @@ app.get('/gallery/:id', function(req, res) {
 });
 
 app.put('/gallery/:id', function (req, res) {
-  console.log(req.body);
   models.Photo
     .findById(req.params.id)
     .then(function(photo) {
       return photo.updateAttributes({
-        author: photo.author,
-        description: photo.description,
-        link: photo.link
+        author: req.body.author,
+        description: req.body.description,
+        link: req.body.link
       });
     })
     .then(function() {
       res.redirect('/gallery/' + req.params.id);
+    });
+});
+
+app.delete('/gallery/:id', function (req,res) {
+  models.Photo
+    .findById(req.params.id)
+    .then(function(photo) {
+      return photo.destroy(photo);
+    })
+    .then(function() {
+      res.redirect('/');
     });
 });
 
