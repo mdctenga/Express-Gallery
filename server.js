@@ -27,9 +27,6 @@ app.use(methodOverride(function(req, res){
   }
 }));
 
-
-
-
 app.get('/', function(req, res) {
   models.Photo
     .findAll()
@@ -42,7 +39,9 @@ app.get('/gallery/:id', function(req, res) {
   models.Photo
     .findById(req.params.id)
     .then(function(photo) {
-
+      if (!photo) {
+        return res.redirect('/new_photo');
+      }
       res.render('display_photo', {"photo": photo});
     });
 });

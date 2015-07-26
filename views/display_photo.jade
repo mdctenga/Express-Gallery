@@ -1,17 +1,18 @@
 extends _layout
 
 block content
-  h1 display_photo view
   ul
     p #{photo.author}
     p #{photo.description}
     img(src="#{photo.link}")
   form(action='/gallery/#{photo.id}', method='POST', enctype='application/x-www-form-urlencoded')
     input(type='hidden', value='PUT', name='_method')
-    input(type='text' name='author')
-    input(type='text' name='description')
-    input(type='text' name='link')
+    input(type='text' name='author' value='#{photo.author}')
+    input(type='text' name='description' value='#{photo.description}')
+    input(type='text' name='link' value='#{photo.link}')
     button Submit
   form(action='/gallery/#{photo.id}', method='POST', enctype='application/x-www-form-urlencoded')
     input(type='hidden', value='DELETE', name='_method')
     button Delete Photo
+  form(action='/gallery', method='POST', enctype='application/x-www-form-urlencoded')
+    button Return to Gallery
