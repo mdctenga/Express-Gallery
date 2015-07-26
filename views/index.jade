@@ -1,12 +1,13 @@
 extends _layout
 
 block content
-  div#galleryFunction
-    a(href="/new_photo") Add new photo
-  div#galleryContent
-    each photo in photos
+    div#galleryContent
+      div.galleryPreview
+      div.galleryFunction
+        a(href="/new_photo") Add new photo
       div.photos
-        p.author #{photo.author}
-        p.description #{photo.description}
-        a.galleryImage(href='/gallery/#{photo.id}')
-          img(src='#{photo.link}')
+        each photo in photos
+          p.author #{photo.author}
+          p.description #{photo.description}
+          a.galleryImage(href='/gallery/#{photo.id}')
+            img(src='#{photo.link}')
