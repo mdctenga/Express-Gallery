@@ -5,6 +5,8 @@ var app = express();
 var sequelize = require('sequelize');
 var models  = require('./models');
 
+var path = require('path');
+
 var jade = require('jade');
 
 var bodyParser = require('body-parser');
@@ -16,6 +18,8 @@ var morgan = require('morgan');
 
 app.set('views', './views');
 app.set('view engine', 'jade');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(morgan('dev'));
 

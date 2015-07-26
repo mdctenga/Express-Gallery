@@ -1,0 +1,22 @@
+body {
+  background-image: url("https://s-media-cache-ak0.pinimg.com/236x/1c/fe/ae/1cfeaea566fca482b47b163af0bd7d64.jpg")
+}
+
+a.galleryImage {
+  display: block;
+  width: 300px;
+}
+
+.galleryImage img {
+  width: 100%
+}
+#galleryContent {
+  float: right;
+  width: 300px;
+}
+.photos {
+  display: block;
+  text-align: right;
+  float: right;
+  width: 300px;
+}
