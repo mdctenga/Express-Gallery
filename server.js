@@ -76,10 +76,6 @@ app.get('/new_photo', function (req, res) {
   res.render('new_photo');
 });
 
-app.get('/gallery/:id/edit', function (req, res) {
-  res.render('edit_photo');
-});
-
 module.exports = router;
 
 app.post('/gallery', function (req, res) {
