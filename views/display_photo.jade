@@ -14,5 +14,5 @@ block content
   form(action='/gallery/#{photo.id}', method='POST', enctype='application/x-www-form-urlencoded')
     input(type='hidden', value='DELETE', name='_method')
     button Delete Photo
-  form(action='/gallery', method='POST', enctype='application/x-www-form-urlencoded')
-    button Return to Gallery
+  a(href='/')
+    button Back to the gallery

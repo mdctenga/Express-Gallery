@@ -5,4 +5,4 @@ block content
     each photo in photos
       p #{photo.author}
       p #{photo.description}
-      img(src="#{photo.link}")
+      img(href='/gallery/#{photo.id}' src='#{photo.link}')
